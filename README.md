@@ -1,0 +1,1 @@
+# ranger-azuredevops-azp-templates
