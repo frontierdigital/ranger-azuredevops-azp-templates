@@ -1,0 +1,5 @@
+---
+jobs:
+  - job: Preflight
+    steps:
+      - template: ../steps/get-version-from-file.yml

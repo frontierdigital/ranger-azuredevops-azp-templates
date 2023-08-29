@@ -1,0 +1,35 @@
+---
+parameters:
+  - name: configRef
+    type: string
+  - name: deploySteps
+    type: stepList
+    default: []
+  - name: environment
+    type: string
+  - name: name
+    type: string
+  - name: organisationName
+    type: string
+  - name: serviceConnectionName
+    type: string
+  - name: set
+    type: string
+  - name: version
+    type: string
+
+resources:
+  repositories:
+    - repository: self
+
+stages:
+  - template: ../stages/deploy.yml
+    parameters:
+      configRef: ${{ parameters.configRef }}
+      deploySteps: ${{ parameters.deploySteps }}
+      environment: ${{ parameters.environment }}
+      organisationName: ${{ parameters.organisationName }}
+      serviceConnectionName: ${{ parameters.serviceConnectionName }}
+      set: ${{ parameters.set }}
+      workloadName: ${{ parameters.name }}
+      workloadVersion: ${{ parameters.version }}

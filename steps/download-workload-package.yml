@@ -1,0 +1,14 @@
+---
+parameters:
+  - name: version
+    type: string
+
+steps:
+  - task: UniversalPackages@0
+    displayName: Download workload package
+    inputs:
+      command: download
+      versionOption: custom
+      vstsFeed: $(System.TeamProject)/workloads
+      vstsFeedPackage: $(Build.Repository.Name)
+      vstsPackageVersion: ${{ parameters.version }}

@@ -1,0 +1,10 @@
+---
+steps:
+  - bash: |
+      set -eo pipefail
+      VERSION_FROM_FILE=$(cat $(System.DefaultWorkingDirectory)/VERSION)
+      echo $VERSION_FROM_FILE
+      echo "##vso[task.setvariable variable=versionFromFile]$VERSION_FROM_FILE"
+      echo "##vso[task.setvariable variable=versionFromFile;isOutput=true]$VERSION_FROM_FILE"
+    name: getVersionFromFile
+    displayName: Get version from file

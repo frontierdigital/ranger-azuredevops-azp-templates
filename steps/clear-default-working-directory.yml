@@ -1,0 +1,7 @@
+---
+steps:
+  - task: DeleteFiles@1
+    inputs:
+      contents: "**/*"
+      sourceFolder: $(System.DefaultWorkingDirectory)
+    displayName: Clear default working directory

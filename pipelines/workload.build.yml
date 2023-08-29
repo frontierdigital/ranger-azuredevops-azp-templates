@@ -1,0 +1,56 @@
+---
+parameters:
+  - name: action
+    type: string
+    values:
+      - Default
+      - Publish
+  - name: buildSteps
+    type: stepList
+    default: []
+  - name: gitAuthorEmail
+    type: string
+  - name: gitAuthorName
+    type: string
+  - name: organisationName
+    type: string
+  - name: postPublishSteps
+    type: stepList
+    default: []
+  - name: prePublishSteps
+    type: stepList
+    default: []
+  - name: setupSteps
+    type: stepList
+    default: []
+  - name: testSteps
+    type: stepList
+    default: []
+
+resources:
+  repositories:
+    - repository: self
+
+stages:
+  - template: ../stages/build.yml
+    parameters:
+      buildSteps: ${{ parameters.buildSteps }}
+      gitAuthorEmail: ${{ parameters.gitAuthorEmail }}
+      gitAuthorName: ${{ parameters.gitAuthorName }}
+      organisationName: ${{ parameters.organisationName }}
+      postPublishSteps: ${{ parameters.postPublishSteps }}
+      prePublishSteps: ${{ parameters.prePublishSteps }}
+      setupSteps: ${{ parameters.setupSteps }}
+      testSteps: ${{ parameters.testSteps }}
+  - template: ../stages/publish.yml
+    parameters:
+      condition: |
+        and(
+          succeeded(),
+          or(
+            eq(variables['build.sourceBranch'], 'refs/heads/main'),
+            eq('${{ parameters.action }}', 'Publish')
+          )
+        )
+      jobs:
+        - template: ../jobs/publish-workload-package.yml

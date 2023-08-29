@@ -1,0 +1,47 @@
+---
+parameters:
+  - name: action
+    type: string
+    values:
+      - Default
+      - DryRun
+  - name: gitAuthorEmail
+    type: string
+  - name: gitAuthorName
+    type: string
+  - name: nextEnvironment
+    type: string
+    default: ""
+  - name: organisationName
+    type: string
+  - name: rangerVersion
+    type: string
+
+resources:
+  repositories:
+    - repository: self
+
+jobs:
+  - job: Execute
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      - task: InstallRangerCLI@0
+        inputs:
+          version: ${{ parameters.rangerVersion }}
+      - task: DeploySet@0
+        inputs:
+          gitUserName: Build Bot
+          gitUserEmail: build.bot@frontier-digital.co.uk
+          organisationName: frontierdigital
+          pat: $(System.AccessToken)
+          projectName: $(System.TeamProject)
+      - ${{ if parameters.nextEnvironment }}:
+          - task: PromoteSet@0
+            inputs:
+              gitAuthorEmail: ${{ parameters.gitAuthorEmail }}
+              gitAuthorName: ${{ parameters.gitAuthorName }}
+              organisationName: ${{ parameters.organisationName }}
+              pat: $(System.AccessToken)
+              projectName: $(System.TeamProject)
+              targetEnvironment: ${{ parameters.nextEnvironment }}

@@ -1,0 +1,10 @@
+---
+parameters:
+  - name: artifactName
+    type: string
+    default: drop
+
+steps:
+  - publish: $(System.DefaultWorkingDirectory)
+    displayName: Publish pipeline artifact
+    artifact: ${{ parameters.artifactName }}

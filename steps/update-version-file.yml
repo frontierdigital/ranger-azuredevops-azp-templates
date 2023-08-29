@@ -1,0 +1,8 @@
+---
+parameters:
+  - name: version
+    type: string
+
+steps:
+  - bash: echo ${{ parameters.version }} > $(System.DefaultWorkingDirectory)/VERSION
+    displayName: Update version file

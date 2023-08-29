@@ -1,0 +1,12 @@
+---
+parameters:
+  - name: artifactName
+    type: string
+    default: drop
+
+steps:
+  - task: DownloadPipelineArtifact@2
+    displayName: Download pipeline artifact
+    inputs:
+      artifact: ${{ parameters.artifactName }}
+      path: $(System.DefaultWorkingDirectory)

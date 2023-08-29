@@ -1,1 +1,1 @@
-# ranger-azuredevops-azp-templates
+# Ranger Azure DevOps AZP templates

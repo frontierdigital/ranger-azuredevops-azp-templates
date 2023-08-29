@@ -1,0 +1,14 @@
+---
+jobs:
+  - job: PublishUniversalPackage
+    displayName: Publish workload package
+    steps:
+      - download: none
+      - checkout: none
+      - template: ../steps/clear-default-working-directory.yml
+      - template: ../steps/download-pipeline-artifact.yml
+      - template: ../steps/get-version-from-file.yml
+      - template: ../steps/publish-workload-package.yml
+        parameters:
+          version: $(versionFromFile)
+      - template: ../steps/clear-agent-build-directory.yml

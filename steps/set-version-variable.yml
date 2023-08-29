@@ -1,0 +1,19 @@
+---
+parameters:
+  - name: pipelineCounter
+    type: string
+  - name: versionFromFile
+    type: string
+  - name: versionLabel
+    type: string
+
+steps:
+  - bash: |
+      VERSION_FROM_FILE=${{ parameters.versionFromFile }}
+      MAJOR_MINOR_VERSION=${VERSION_FROM_FILE%.*}
+      VERSION="$MAJOR_MINOR_VERSION.${{ parameters.pipelineCounter }}${{ parameters.versionLabel }}"
+      echo $VERSION
+      echo "##vso[task.setvariable variable=version]$VERSION"
+      echo "##vso[task.setvariable variable=version;isOutput=true]$VERSION"
+    name: setVersionVariable
+    displayName: Set version variable

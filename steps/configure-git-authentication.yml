@@ -1,0 +1,16 @@
+---
+parameters:
+  - name: organisationName
+    type: string
+  - name: pat
+    type: string
+
+steps:
+  - bash: |
+      set -euo pipefail
+
+      if [[ -f "~/.gitconfig" ]]; then
+        git config --global --list | grep ${{ parameters.organisationName }}@dev.azure.com | sed -E 's/(.*)\.insteadof=https:\/\/${{ parameters.organisationName }}@dev\.azure\.com/\1/g' | xargs -n1 -- git config --global --remove-section
+      fi
+      git config --global url."https://${{ parameters.pat }}:x-oauth-basic@dev.azure.com".insteadOf https://${{ parameters.organisationName }}@dev.azure.com
+    displayName: Configure git authentication

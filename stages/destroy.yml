@@ -1,0 +1,51 @@
+---
+parameters:
+  - name: configRef
+    type: string
+  - name: destroySteps
+    type: stepList
+    default: []
+  - name: environment
+    type: string
+  - name: organisationName
+    type: string
+  - name: serviceConnectionName
+    type: string
+  - name: set
+    type: string
+  - name: workloadName
+    type: string
+  - name: workloadVersion
+    type: string
+
+stages:
+  - stage: Destroy
+    pool:
+      vmImage: ubuntu-latest
+    jobs:
+      - deployment: DestroyFromPipelineArtifact
+        displayName: Destroy workload package
+        environment:
+          name: ${{ parameters.environment }}
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: none
+                - checkout: none
+                - template: ../steps/clear-default-working-directory.yml
+                - template: ../steps/download-workload-package.yml
+                  parameters:
+                    version: ${{ parameters.workloadVersion }}
+                - template: ../steps/configure-git-authentication.yml
+                  parameters:
+                    organisationName: ${{ parameters.organisationName }}
+                    pat: $(System.AccessToken)
+                - ${{ if parameters.configRef }}:
+                    - template: ../steps/fetch-config-and-secrets.yml
+                      parameters:
+                        organisationName: ${{ parameters.organisationName }}
+                        ref: ${{ parameters.configRef }}
+                        serviceConnectionName: ${{ parameters.serviceConnectionName }}
+                - ${{ parameters.destroySteps }}
+                - template: ../steps/clear-agent-build-directory.yml

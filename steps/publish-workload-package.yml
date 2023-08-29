@@ -1,0 +1,15 @@
+---
+parameters:
+  - name: version
+    type: string
+
+steps:
+  - task: UniversalPackages@0
+    displayName: Publish workload package
+    inputs:
+      command: publish
+      publishDirectory: $(System.DefaultWorkingDirectory)
+      versionOption: custom
+      versionPublish: ${{ parameters.version }}
+      vstsFeedPublish: $(System.TeamProject)/workloads
+      vstsFeedPackagePublish: $(Build.Repository.Name)

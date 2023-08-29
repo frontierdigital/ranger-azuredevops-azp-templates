@@ -1,0 +1,72 @@
+---
+parameters:
+  - name: buildSteps
+    type: stepList
+    default: []
+  - name: gitAuthorEmail
+    type: string
+  - name: gitAuthorName
+    type: string
+  - name: organisationName
+    type: string
+  - name: postPublishSteps
+    type: stepList
+    default: []
+  - name: prePublishSteps
+    type: stepList
+    default: []
+  - name: setupSteps
+    type: stepList
+    default: []
+  - name: testSteps
+    type: stepList
+    default: []
+
+stages:
+  - stage: Build
+    pool:
+      vmImage: ubuntu-latest
+    jobs:
+      - template: ../jobs/preflight.yml
+      - job: Build
+        dependsOn: Preflight
+        variables:
+          - name: versionFromFile
+            value: $[dependencies.Preflight.outputs['getVersionFromFile.versionFromFile']]
+          - name: versionLabel
+            ${{ if or(eq(variables['Build.SourceBranchName'], 'main'), eq(variables['Build.SourceBranchName'], 'master')) }}:
+              value: ""
+            ${{ if and(ne(variables['Build.SourceBranchName'], 'main'), ne(variables['Build.SourceBranchName'], 'master')) }}:
+              value: "-unstable"
+          - name: pipelineCounter
+            value: $[counter(dependencies.Preflight.outputs['getVersionFromFile.versionFromFile'], 0)]
+        steps:
+          - checkout: self
+            submodules: true
+          - template: ../steps/configure-git-authentication.yml
+            parameters:
+              organisationName: ${{ parameters.organisationName }}
+              pat: $(System.AccessToken)
+          - template: ../steps/configure-git-author.yml
+            parameters:
+              gitAuthorEmail: ${{ parameters.gitAuthorEmail }}
+              gitAuthorName: ${{ parameters.gitAuthorName }}
+          - template: ../steps/set-version-variable.yml
+            parameters:
+              pipelineCounter: $(pipelineCounter)
+              versionFromFile: $(versionFromFile)
+              versionLabel: $(versionLabel)
+          - template: ../steps/add-tag.yml
+            parameters:
+              force: true
+              tag: $(version)
+          - template: ../steps/update-version-file.yml
+            parameters:
+              version: $(version)
+          - ${{ parameters.setupSteps }}
+          - ${{ parameters.buildSteps }}
+          - ${{ parameters.testSteps }}
+          - ${{ parameters.prePublishSteps }}
+          - template: ../steps/publish-pipeline-artifact.yml
+          - ${{ parameters.postPublishSteps }}
+          - template: ../steps/clear-agent-build-directory.yml
