@@ -9,9 +9,7 @@ parameters:
 
 steps:
   - pwsh: |
-      $VersionFromFile = ${{ parameters.versionFromFile }}
-      $MajorMinorVersion = Get-Content (Join-Path "$(System.DefaultWorkingDirectory)" -ChildPath "VERSION") | Select-String '^(\d+\.\d+)' | ForEach-Object{$_.Matches.Groups[1].Value}
-      $Version = "$MajorMinorVersion.${{ parameters.pipelineCounter }}${{ parameters.versionLabel }}"
+      $Version = "${{ parameters.versionFromFile }}.${{ parameters.pipelineCounter }}${{ parameters.versionLabel }}"
       Write-Host "$Version"
       Write-Host "##vso[task.setvariable variable=version]$Version"
       Write-Host "##vso[task.setvariable variable=version;isOutput=true]$Version"
