@@ -15,8 +15,6 @@ parameters:
     type: string
   - name: workloadName
     type: string
-  - name: workloadVersion
-    type: string
 
 stages:
   - stage: Destroy
@@ -36,7 +34,7 @@ stages:
                 - template: ../steps/clear-default-working-directory.yml
                 - template: ../steps/download-workload-package.yml
                   parameters:
-                    version: ${{ parameters.workloadVersion }}
+                    version: $(Build.SourceBranchName)
                 - template: ../steps/configure-git-authentication.yml
                   parameters:
                     organisationName: ${{ parameters.organisationName }}

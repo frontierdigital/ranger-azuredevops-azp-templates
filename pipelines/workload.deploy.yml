@@ -7,15 +7,13 @@ parameters:
     default: []
   - name: environment
     type: string
-  - name: name
-    type: string
   - name: organisationName
     type: string
   - name: serviceConnectionName
     type: string
   - name: set
     type: string
-  - name: version
+  - name: workloadName
     type: string
 
 resources:
@@ -31,5 +29,4 @@ stages:
       organisationName: ${{ parameters.organisationName }}
       serviceConnectionName: ${{ parameters.serviceConnectionName }}
       set: ${{ parameters.set }}
-      workloadName: ${{ parameters.name }}
-      workloadVersion: ${{ parameters.version }}
+      workloadName: ${{ parameters.workloadName }}
