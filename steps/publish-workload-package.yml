@@ -1,5 +1,7 @@
 ---
 parameters:
+  - name: feedName
+    type: string
   - name: version
     type: string
 
@@ -11,5 +13,5 @@ steps:
       publishDirectory: $(System.DefaultWorkingDirectory)
       versionOption: custom
       versionPublish: ${{ parameters.version }}
-      vstsFeedPublish: $(System.TeamProject)/workloads
+      vstsFeedPublish: $(System.TeamProject)/${{ parameters.feedName }}
       vstsFeedPackagePublish: $(Build.Repository.Name)

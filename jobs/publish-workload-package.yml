@@ -1,4 +1,8 @@
 ---
+parameters:
+  - name: workloadFeedName
+    type: string
+
 jobs:
   - job: PublishUniversalPackage
     displayName: Publish workload package
@@ -10,5 +14,6 @@ jobs:
       - template: ../steps/get-version-from-file.yml
       - template: ../steps/publish-workload-package.yml
         parameters:
+          feedName: ${{ parameters.workloadFeedName }}
           version: $(versionFromFile)
       - template: ../steps/clear-agent-build-directory.yml

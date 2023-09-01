@@ -26,6 +26,8 @@ parameters:
   - name: testSteps
     type: stepList
     default: []
+  - name: workloadFeedName
+    type: string
 
 resources:
   repositories:
@@ -54,3 +56,5 @@ stages:
         )
       jobs:
         - template: ../jobs/publish-workload-package.yml
+          parameters:
+            workloadFeedName: ${{ parameters.workloadFeedName }}
