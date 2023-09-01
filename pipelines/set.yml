@@ -5,9 +5,9 @@ parameters:
     values:
       - Default
       - DryRun
-  - name: gitAuthorEmail
+  - name: gitUserEmail
     type: string
-  - name: gitAuthorName
+  - name: gitUserName
     type: string
   - name: nextEnvironment
     type: string
@@ -31,17 +31,17 @@ jobs:
           version: ${{ parameters.rangerVersion }}
       - task: DeploySet@0
         inputs:
-          gitUserName: Build Bot
-          gitUserEmail: build.bot@frontier-digital.co.uk
+          gitUserEmail: ${{ parameters.gitUserEmail }}
+          gitUserName: ${{ parameters.gitUserName }}
           organisationName: frontierdigital
           pat: $(System.AccessToken)
           projectName: $(System.TeamProject)
       - ${{ if parameters.nextEnvironment }}:
           - task: PromoteSet@0
             inputs:
-              gitAuthorEmail: ${{ parameters.gitAuthorEmail }}
-              gitAuthorName: ${{ parameters.gitAuthorName }}
+              gitUserEmail: ${{ parameters.gitUserEmail }}
+              gitUserName: ${{ parameters.gitUserName }}
+              nextEnvironment: ${{ parameters.nextEnvironment }}
               organisationName: ${{ parameters.organisationName }}
               pat: $(System.AccessToken)
               projectName: $(System.TeamProject)
-              targetEnvironment: ${{ parameters.nextEnvironment }}
