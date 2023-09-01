@@ -8,14 +8,12 @@ parameters:
 
 steps:
   - ${{ if parameters.force }}:
-      - script: |
+      - bash: |
           git tag -a "${{ parameters.tag }}" -m "${{ parameters.tag }}" --force
           git push --tags --force
-        failOnStderr: true
         displayName: Add tag
   - ${{ else }}:
-      - script: |
+      - bash: |
           git tag -a "${{ parameters.tag }}" -m "${{ parameters.tag }}"
           git push --tags
-        failOnStderr: true
         displayName: Add tag
