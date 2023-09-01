@@ -4,5 +4,7 @@ parameters:
     type: string
 
 steps:
-  - bash: echo ${{ parameters.version }} > $(System.DefaultWorkingDirectory)/VERSION
+  - pwsh: |
+      Write-Host "${{ parameters.version }}"
+      "${{ parameters.version }}" | Out-File $(System.DefaultWorkingDirectory)/VERSION
     displayName: Update version file

@@ -6,9 +6,7 @@ parameters:
     type: string
 
 steps:
-  - bash: |
-      set -euo pipefail
-
+  - script: |
       git config --local user.email "${{ parameters.gitAuthorEmail }}"
       git config --local user.name "${{ parameters.gitAuthorName }}"
     displayName: Configure git author

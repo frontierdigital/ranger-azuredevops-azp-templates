@@ -8,16 +8,12 @@ parameters:
 
 steps:
   - ${{ if parameters.force }}:
-      - bash: |
-          set -euo pipefail
-
+      - script: |
           git tag -a "${{ parameters.tag }}" -m "${{ parameters.tag }}" --force
           git push --tags --force
         displayName: Add tag
   - ${{ else }}:
-      - bash: |
-          set -euo pipefail
-
+      - script: |
           git tag -a "${{ parameters.tag }}" -m "${{ parameters.tag }}"
           git push --tags
         displayName: Add tag

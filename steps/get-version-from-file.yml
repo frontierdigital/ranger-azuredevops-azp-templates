@@ -1,10 +1,11 @@
 ---
 steps:
-  - bash: |
-      set -eo pipefail
-      VERSION_FROM_FILE=$(cat $(System.DefaultWorkingDirectory)/VERSION)
-      echo $VERSION_FROM_FILE
-      echo "##vso[task.setvariable variable=versionFromFile]$VERSION_FROM_FILE"
-      echo "##vso[task.setvariable variable=versionFromFile;isOutput=true]$VERSION_FROM_FILE"
+  - pwsh: |
+      $Version = Get-Content (Join-Path "$(System.DefaultWorkingDirectory)" -ChildPath "VERSION")
+      if (!$Version) { Throw "Unable to get version from file" }
+      if (!$Version -match '^(\d+\.\d+)$') { Throw "Version in file does not match format [major].[minor]" }
+      Write-Host "$Version"
+      Write-Host "##vso[task.setvariable variable=version]$Version"
+      Write-Host "##vso[task.setvariable variable=version;isOutput=true]$Version"
     name: getVersionFromFile
     displayName: Get version from file
