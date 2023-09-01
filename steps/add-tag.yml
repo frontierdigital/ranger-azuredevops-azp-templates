@@ -11,9 +11,11 @@ steps:
       - script: |
           git tag -a "${{ parameters.tag }}" -m "${{ parameters.tag }}" --force
           git push --tags --force
+        continueOnError: false
         displayName: Add tag
   - ${{ else }}:
       - script: |
           git tag -a "${{ parameters.tag }}" -m "${{ parameters.tag }}"
           git push --tags
+        continueOnError: false
         displayName: Add tag
