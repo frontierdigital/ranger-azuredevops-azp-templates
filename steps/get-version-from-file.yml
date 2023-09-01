@@ -5,6 +5,7 @@ steps:
       if (!$Version) { Throw "Unable to get version from file" }
       if (!$Version -match '^(\d+\.\d+)$') { Throw "Version in file does not match format [major].[minor]" }
       Write-Host "$Version"
+      Write-Host $Version -match '^(\d+\.\d+)$'
       Write-Host "##vso[task.setvariable variable=version]$Version"
       Write-Host "##vso[task.setvariable variable=version;isOutput=true]$Version"
     name: getVersionFromFile
