@@ -36,7 +36,7 @@ stages:
                 - template: ../steps/clear-default-working-directory.yml
                 - template: ../steps/download-workload-package.yml
                   parameters:
-                    workloadFeedName: ${{ parameters.workloadFeedName }}
+                    feedName: ${{ parameters.workloadFeedName }}
                     version: $(Build.SourceBranchName)
                 - template: ../steps/configure-git-authentication.yml
                   parameters:
