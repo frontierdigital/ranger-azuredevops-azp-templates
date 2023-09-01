@@ -3,9 +3,9 @@ parameters:
   - name: buildSteps
     type: stepList
     default: []
-  - name: gitAuthorEmail
+  - name: gitUserEmail
     type: string
-  - name: gitAuthorName
+  - name: gitUserName
     type: string
   - name: organisationName
     type: string
@@ -47,10 +47,10 @@ stages:
             parameters:
               organisationName: ${{ parameters.organisationName }}
               pat: $(System.AccessToken)
-          - template: ../steps/configure-git-author.yml
+          - template: ../steps/configure-git-user.yml
             parameters:
-              gitAuthorEmail: ${{ parameters.gitAuthorEmail }}
-              gitAuthorName: ${{ parameters.gitAuthorName }}
+              gitUserEmail: ${{ parameters.gitUserEmail }}
+              gitUserName: ${{ parameters.gitUserName }}
           - template: ../steps/set-version-variable.yml
             parameters:
               pipelineCounter: $(pipelineCounter)

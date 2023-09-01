@@ -9,6 +9,8 @@ parameters:
 
 steps:
   - pwsh: |
+      $VersionFromFile = "${{ parameters.versionFromFile }}"
+      if ($VersionFromFile -notmatch '^(\d+\.\d+)$') { Throw "Version from file does not match format [major].[minor]" }
       $Version = "${{ parameters.versionFromFile }}.${{ parameters.pipelineCounter }}${{ parameters.versionLabel }}"
       Write-Host "$Version"
       Write-Host "##vso[task.setvariable variable=version]$Version"

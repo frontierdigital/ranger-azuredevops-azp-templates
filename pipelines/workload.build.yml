@@ -8,9 +8,9 @@ parameters:
   - name: buildSteps
     type: stepList
     default: []
-  - name: gitAuthorEmail
+  - name: gitUserEmail
     type: string
-  - name: gitAuthorName
+  - name: gitUserName
     type: string
   - name: organisationName
     type: string
@@ -35,8 +35,8 @@ stages:
   - template: ../stages/build.yml
     parameters:
       buildSteps: ${{ parameters.buildSteps }}
-      gitAuthorEmail: ${{ parameters.gitAuthorEmail }}
-      gitAuthorName: ${{ parameters.gitAuthorName }}
+      gitUserEmail: ${{ parameters.gitUserEmail }}
+      gitUserName: ${{ parameters.gitUserName }}
       organisationName: ${{ parameters.organisationName }}
       postPublishSteps: ${{ parameters.postPublishSteps }}
       prePublishSteps: ${{ parameters.prePublishSteps }}

@@ -3,7 +3,6 @@ steps:
   - pwsh: |
       $Version = Get-Content (Join-Path "$(System.DefaultWorkingDirectory)" -ChildPath "VERSION")
       if (!$Version) { Throw "Unable to get version from file" }
-      if ($Version -notmatch '^(\d+\.\d+)$') { Throw "Version in file does not match format [major].[minor]" }
       Write-Host "$Version"
       Write-Host "##vso[task.setvariable variable=versionFromFile]$Version"
       Write-Host "##vso[task.setvariable variable=versionFromFile;isOutput=true]$Version"
