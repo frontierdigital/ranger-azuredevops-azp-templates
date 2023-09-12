@@ -58,7 +58,7 @@ stages:
               versionLabel: $(versionLabel)
           - template: ../steps/add-tag.yml
             parameters:
-              force: true
+              force: true # TODO: Remove
               tag: $(version)
           - template: ../steps/update-version-file.yml
             parameters:
