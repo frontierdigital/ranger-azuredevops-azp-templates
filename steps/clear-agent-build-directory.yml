@@ -10,4 +10,4 @@ steps:
       contents: "**/*"
       sourceFolder: $(Agent.BuildDirectory)
     displayName: Clear agent build directory
-    condition: always()
+    condition: ${{ parameters.condition }}
