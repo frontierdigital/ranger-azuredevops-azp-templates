@@ -13,6 +13,8 @@ parameters:
     type: string
   - name: set
     type: string
+  - name: workloadFeedName
+    type: string
   - name: workloadName
     type: string
 
@@ -34,6 +36,7 @@ stages:
                 - template: ../steps/clear-default-working-directory.yml
                 - template: ../steps/download-workload-package.yml
                   parameters:
+                    feedName: ${{ parameters.workloadFeedName }}
                     version: $(Build.SourceBranchName)
                 - template: ../steps/configure-git-authentication.yml
                   parameters:
