@@ -70,4 +70,3 @@ stages:
           - template: ../steps/publish-pipeline-artifact.yml
           - ${{ parameters.postPublishSteps }}
           - template: ../steps/clear-agent-build-directory.yml
-            condition: always()

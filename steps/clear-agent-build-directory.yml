@@ -1,7 +1,13 @@
 ---
+parameters:
+  - name: condition
+    type: string
+    default: always()
+
 steps:
   - task: DeleteFiles@1
     inputs:
       contents: "**/*"
       sourceFolder: $(Agent.BuildDirectory)
     displayName: Clear agent build directory
+    condition: always()

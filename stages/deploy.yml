@@ -50,4 +50,3 @@ stages:
                         serviceConnectionName: ${{ parameters.serviceConnectionName }}
                 - ${{ parameters.deploySteps }}
                 - template: ../steps/clear-agent-build-directory.yml
-                  condition: always()
