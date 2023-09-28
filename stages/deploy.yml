@@ -34,10 +34,6 @@ stages:
           runOnce:
             deploy:
               steps:
-                - ${{ parameters.deploySteps }}
-                - template: ../steps/clear-agent-build-directory.yml
-            preDeploy:
-              steps:
                 - download: none
                 - checkout: none
                 - template: ../steps/clear-default-working-directory.yml
@@ -56,3 +52,5 @@ stages:
                         ref: ${{ parameters.configRef }}
                         serviceConnectionName: ${{ parameters.serviceConnectionName }}
                 - ${{ parameters.installSteps }}
+                - ${{ parameters.deploySteps }}
+                - template: ../steps/clear-agent-build-directory.yml
