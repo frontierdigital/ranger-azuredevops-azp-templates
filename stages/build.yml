@@ -7,15 +7,15 @@ parameters:
     type: string
   - name: gitUserName
     type: string
+  - name: installSteps
+    type: stepList
+    default: []
   - name: organisationName
     type: string
   - name: postPublishSteps
     type: stepList
     default: []
   - name: prePublishSteps
-    type: stepList
-    default: []
-  - name: setupSteps
     type: stepList
     default: []
   - name: testSteps
@@ -63,7 +63,7 @@ stages:
           - template: ../steps/update-version-file.yml
             parameters:
               version: $(version)
-          - ${{ parameters.setupSteps }}
+          - ${{ parameters.installSteps }}
           - ${{ parameters.buildSteps }}
           - ${{ parameters.testSteps }}
           - ${{ parameters.prePublishSteps }}
