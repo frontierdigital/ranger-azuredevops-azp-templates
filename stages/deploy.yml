@@ -7,6 +7,9 @@ parameters:
     default: []
   - name: environment
     type: string
+  - name: installSteps
+    type: stepList
+    default: []
   - name: organisationName
     type: string
   - name: serviceConnectionName
@@ -48,5 +51,6 @@ stages:
                         organisationName: ${{ parameters.organisationName }}
                         ref: ${{ parameters.configRef }}
                         serviceConnectionName: ${{ parameters.serviceConnectionName }}
+                - ${{ parameters.installSteps }}
                 - ${{ parameters.deploySteps }}
                 - template: ../steps/clear-agent-build-directory.yml
