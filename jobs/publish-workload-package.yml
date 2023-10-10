@@ -15,10 +15,10 @@ jobs:
       - pwsh: |
           $Content = Get-Content (Join-Path "$(System.DefaultWorkingDirectory)" -ChildPath "README.md")
           Write-Host "##vso[task.setvariable variable=readmeContent]$Content"
-        displayName: Set version from file
+        displayName: Get ReadMe from file
       - template: ../steps/publish-workload-package.yml
         parameters:
-          description: $(readmeContent)
+          description: "$(readmeContent)"
           feedName: ${{ parameters.workloadFeedName }}
           version: $(versionFromFile)
       - template: ../steps/clear-agent-build-directory.yml
