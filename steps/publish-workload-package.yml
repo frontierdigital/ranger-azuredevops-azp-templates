@@ -13,7 +13,7 @@ steps:
     displayName: Publish workload package
     inputs:
       command: publish
-      packagePublishDescription: ${{ parameters.description }}
+      packagePublishDescription: "\"${{ parameters.description }}\""
       publishDirectory: $(System.DefaultWorkingDirectory)
       versionOption: custom
       versionPublish: ${{ parameters.version }}
