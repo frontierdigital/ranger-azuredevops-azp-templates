@@ -12,8 +12,13 @@ jobs:
       - template: ../steps/clear-default-working-directory.yml
       - template: ../steps/download-pipeline-artifact.yml
       - template: ../steps/get-version-from-file.yml
+      - pwsh: |
+          $Content = Get-Content (Join-Path "$(System.DefaultWorkingDirectory)" -ChildPath "README.md")
+          Write-Host "##vso[task.setvariable variable=readmeContent]$Content"
+        displayName: Set version from file
       - template: ../steps/publish-workload-package.yml
         parameters:
+          description: $(readmeContent)
           feedName: ${{ parameters.workloadFeedName }}
           version: $(versionFromFile)
       - template: ../steps/clear-agent-build-directory.yml

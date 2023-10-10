@@ -1,5 +1,8 @@
 ---
 parameters:
+  - name: description
+    type: string
+    default: ""
   - name: feedName
     type: string
   - name: version
@@ -10,6 +13,7 @@ steps:
     displayName: Publish workload package
     inputs:
       command: publish
+      packagePublishDescription: ${{ parameters.description }}
       publishDirectory: $(System.DefaultWorkingDirectory)
       versionOption: custom
       versionPublish: ${{ parameters.version }}
