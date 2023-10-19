@@ -13,6 +13,7 @@ steps:
 
           git tag -a "${{ parameters.tag }}" -m "${{ parameters.tag }}" --force
           git push --tags --force
+          echo "##vso[build.addbuildtag]${{ parameters.tag }}"
         displayName: Add tag
   - ${{ else }}:
       - bash: |
