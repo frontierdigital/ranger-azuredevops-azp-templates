@@ -5,7 +5,7 @@ parameters:
   - name: destroySteps
     type: stepList
     default: []
-  - name: environment
+  - name: environmentName
     type: string
   - name: installSteps
     type: stepList
@@ -26,7 +26,7 @@ stages:
     parameters:
       configRef: ${{ parameters.configRef }}
       destroySteps: ${{ parameters.destroySteps }}
-      environment: ${{ parameters.environment }}
+      environmentName: ${{ parameters.environmentName }}
       installSteps: ${{ parameters.installSteps }}
       organisationName: ${{ parameters.organisationName }}
       serviceConnectionName: ${{ parameters.serviceConnectionName }}
