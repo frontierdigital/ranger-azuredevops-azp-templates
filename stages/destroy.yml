@@ -14,11 +14,7 @@ parameters:
     type: string
   - name: serviceConnectionName
     type: string
-  - name: set
-    type: string
   - name: workloadFeedName
-    type: string
-  - name: workloadName
     type: string
 
 stages:

@@ -14,11 +14,7 @@ parameters:
     type: string
   - name: serviceConnectionName
     type: string
-  - name: set
-    type: string
   - name: workloadFeedName
-    type: string
-  - name: workloadName
     type: string
 
 resources:
@@ -34,6 +30,4 @@ stages:
       installSteps: ${{ parameters.installSteps }}
       organisationName: ${{ parameters.organisationName }}
       serviceConnectionName: ${{ parameters.serviceConnectionName }}
-      set: ${{ parameters.set }}
       workloadFeedName: ${{ parameters.workloadFeedName }}
-      workloadName: ${{ parameters.workloadName }}
