@@ -5,7 +5,7 @@ parameters:
   - name: deploySteps
     type: stepList
     default: []
-  - name: environmentName
+  - name: environment
     type: string
   - name: installSteps
     type: stepList
@@ -26,7 +26,7 @@ stages:
     parameters:
       configRef: ${{ parameters.configRef }}
       deploySteps: ${{ parameters.deploySteps }}
-      environmentName: ${{ parameters.environmentName }}
+      environment: ${{ parameters.environment }}
       installSteps: ${{ parameters.installSteps }}
       organisationName: ${{ parameters.organisationName }}
       serviceConnectionName: ${{ parameters.serviceConnectionName }}
