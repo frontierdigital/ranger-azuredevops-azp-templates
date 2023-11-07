@@ -17,5 +17,5 @@ steps:
       publishDirectory: $(System.DefaultWorkingDirectory)
       versionOption: custom
       versionPublish: ${{ parameters.version }}
-      vstsFeedPublish: $(System.TeamProject)/${{ parameters.feedName }}
+      vstsFeedPublish: ${{ parameters.feedName }}
       vstsFeedPackagePublish: $(Build.Repository.Name)
