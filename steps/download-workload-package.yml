@@ -11,6 +11,6 @@ steps:
     inputs:
       command: download
       versionOption: custom
-      vstsFeed: $(System.TeamProject)/${{ parameters.feedName }}
+      vstsFeed: ${{ parameters.feedName }}
       vstsFeedPackage: $(Build.Repository.Name)
       vstsPackageVersion: ${{ parameters.version }}
