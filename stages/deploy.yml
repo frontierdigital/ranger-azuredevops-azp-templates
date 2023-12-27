@@ -37,12 +37,12 @@ stages:
                   parameters:
                     feedName: ${{ parameters.workloadFeedName }}
                     version: $(Build.SourceBranchName)
+                - ${{ parameters.installSteps }}
                 - ${{ if not(eq(parameters.configRef, 'null')) }}:
                     - template: ../steps/fetch-config-and-secrets.yml
                       parameters:
                         organisationName: ${{ parameters.organisationName }}
                         ref: ${{ parameters.configRef }}
                         serviceConnectionName: ${{ parameters.serviceConnectionName }}
-                - ${{ parameters.installSteps }}
                 - ${{ parameters.deploySteps }}
                 - template: ../steps/clear-agent-build-directory.yml
