@@ -16,4 +16,3 @@ jobs:
         parameters:
           feedName: ${{ parameters.workloadFeedName }}
           version: $(versionFromFile)
-      - template: ../steps/clear-agent-build-directory.yml

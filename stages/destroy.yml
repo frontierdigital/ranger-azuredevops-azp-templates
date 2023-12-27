@@ -45,4 +45,3 @@ stages:
                         ref: ${{ parameters.configRef }}
                         serviceConnectionName: ${{ parameters.serviceConnectionName }}
                 - ${{ parameters.destroySteps }}
-                - template: ../steps/clear-agent-build-directory.yml

@@ -36,6 +36,7 @@ stages:
             value: $[counter(dependencies.Preflight.outputs['getVersionFromFile.versionFromFile'], 0)]
         steps:
           - checkout: self
+            clean: true
             submodules: true
           - template: ../steps/set-version-variable.yml
             parameters:
@@ -55,4 +56,3 @@ stages:
               tag: $(version)
           - template: ../steps/publish-pipeline-artifact.yml
           - ${{ parameters.postPublishSteps }}
-          - template: ../steps/clear-agent-build-directory.yml
