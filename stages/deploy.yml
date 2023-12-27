@@ -37,10 +37,6 @@ stages:
                   parameters:
                     feedName: ${{ parameters.workloadFeedName }}
                     version: $(Build.SourceBranchName)
-                - template: ../steps/configure-git-authentication.yml
-                  parameters:
-                    organisationName: ${{ parameters.organisationName }}
-                    pat: $(System.AccessToken)
                 - ${{ if not(eq(parameters.configRef, 'null')) }}:
                     - template: ../steps/fetch-config-and-secrets.yml
                       parameters:
