@@ -30,7 +30,7 @@ jobs:
         inputs:
           gitUserEmail: ${{ parameters.gitUserEmail }}
           gitUserName: ${{ parameters.gitUserName }}
-          organisationName: frontierdigital
+          organisationName: ${{ parameters.organisationName }}
           pat: $(System.AccessToken)
           projectName: $(System.TeamProject)
       - task: PromoteSet@0
