@@ -25,7 +25,7 @@ resources:
     - repository: self
 
 stages:
-  - ${{ if ne(parameters.planSteps, '') }}:
+  - ${{ if ne(parameters.planSteps, '[]') }}:
     - template: ../stages/deploy.yml
       parameters:
         configRef: ${{ parameters.configRef }}
