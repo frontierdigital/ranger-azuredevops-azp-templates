@@ -25,6 +25,7 @@ resources:
     - repository: self
 
 stages:
+- ${{ if ene(variables['planSteps'], []) }}:
   - template: ../stages/deploy.yml
     parameters:
       configRef: ${{ parameters.configRef }}
@@ -34,7 +35,6 @@ stages:
       organisationName: ${{ parameters.organisationName }}
       serviceConnectionName: ${{ parameters.serviceConnectionName }}
       workloadFeedName: ${{ parameters.workloadFeedName }}
-    condition: ne(variables['planSteps'], [])
   - template: ../stages/deploy.yml
     parameters:
       configRef: ${{ parameters.configRef }}
