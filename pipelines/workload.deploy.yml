@@ -25,23 +25,23 @@ resources:
     - repository: self
 
 stages:
-  - template: ../stages/deploy.yml
-    condition: ne(length('${{ parameters.stepsList }}'), 0)
-    parameters:
-      configRef: ${{ parameters.configRef }}
-      deploySteps: ${{ parameters.planSteps }}
-      environment: ${{ parameters.environment }}
-      installSteps: ${{ parameters.installSteps }}
-      organisationName: ${{ parameters.organisationName }}
-      serviceConnectionName: ${{ parameters.serviceConnectionName }}
-      stageName: Plan
-      workloadFeedName: ${{ parameters.workloadFeedName }}
-  - template: ../stages/deploy.yml
-    parameters:
-      configRef: ${{ parameters.configRef }}
-      deploySteps: ${{ parameters.deploySteps }}
-      environment: ${{ parameters.environment }}
-      installSteps: ${{ parameters.installSteps }}
-      organisationName: ${{ parameters.organisationName }}
-      serviceConnectionName: ${{ parameters.serviceConnectionName }}
-      workloadFeedName: ${{ parameters.workloadFeedName }}
+  - ${{ if ne(length('${{ parameters.stepsList }}'), 0) }}:
+    - template: ../stages/deploy.yml
+      parameters:
+        configRef: ${{ parameters.configRef }}
+        deploySteps: ${{ parameters.planSteps }}
+        environment: ${{ parameters.environment }}
+        installSteps: ${{ parameters.installSteps }}
+        organisationName: ${{ parameters.organisationName }}
+        serviceConnectionName: ${{ parameters.serviceConnectionName }}
+        stageName: Plan
+        workloadFeedName: ${{ parameters.workloadFeedName }}
+    - template: ../stages/deploy.yml
+      parameters:
+        configRef: ${{ parameters.configRef }}
+        deploySteps: ${{ parameters.deploySteps }}
+        environment: ${{ parameters.environment }}
+        installSteps: ${{ parameters.installSteps }}
+        organisationName: ${{ parameters.organisationName }}
+        serviceConnectionName: ${{ parameters.serviceConnectionName }}
+        workloadFeedName: ${{ parameters.workloadFeedName }}
