@@ -2,6 +2,9 @@
 parameters:
   - name: configRef
     type: string
+  - name: deployJobs
+    type: jobList
+    default: []
   - name: deploySteps
     type: stepList
     default: []
@@ -29,6 +32,7 @@ stages:
     - template: ../stages/deploy.yml
       parameters:
         configRef: ${{ parameters.configRef }}
+        deployJobs: ${{ parameters.deployJobs }}
         deploySteps: ${{ parameters.planSteps }}
         environment: ${{ parameters.environment }}
         installSteps: ${{ parameters.installSteps }}

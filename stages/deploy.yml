@@ -2,6 +2,9 @@
 parameters:
   - name: configRef
     type: string
+  - name: deployJobs
+    type: jobList
+    default: []
   - name: deploySteps
     type: stepList
     default: []
@@ -48,3 +51,4 @@ stages:
                         ref: ${{ parameters.configRef }}
                         serviceConnectionName: ${{ parameters.serviceConnectionName }}
                 - ${{ parameters.deploySteps }}
+                - ${{ parameters.deployJobs }}
