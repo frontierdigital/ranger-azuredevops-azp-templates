@@ -25,7 +25,7 @@ resources:
     - repository: self
 
 stages:
-  - ${{ if ne(length('${{ parameters.stepsList }}'), 0) }}:
+  - ${{ if ne(length(parameters.planSteps), 0) }}:
     - template: ../stages/deploy.yml
       parameters:
         configRef: ${{ parameters.configRef }}
