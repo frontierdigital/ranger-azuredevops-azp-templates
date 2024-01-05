@@ -43,7 +43,6 @@ stages:
   - template: ../stages/deploy.yml
     parameters:
       configRef: ${{ parameters.configRef }}
-      deployJobs: ${{ parameters.deployJobs }}
       deploySteps: ${{ parameters.deploySteps }}
       environment: ${{ parameters.environment }}
       installSteps: ${{ parameters.installSteps }}
