@@ -34,6 +34,7 @@ stages:
         installSteps: ${{ parameters.installSteps }}
         organisationName: ${{ parameters.organisationName }}
         serviceConnectionName: ${{ parameters.serviceConnectionName }}
+        stageName: Plan
         workloadFeedName: ${{ parameters.workloadFeedName }}
     - template: ../stages/deploy.yml
       parameters:

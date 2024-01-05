@@ -14,11 +14,14 @@ parameters:
     type: string
   - name: serviceConnectionName
     type: string
+  - name: stageName
+    type: string
+    default: Deploy
   - name: workloadFeedName
     type: string
 
 stages:
-  - stage: Deploy
+  - stage: ${{ parameters.stageName }}
     pool:
       vmImage: ubuntu-latest
     jobs:
