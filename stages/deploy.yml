@@ -51,4 +51,4 @@ stages:
                         ref: ${{ parameters.configRef }}
                         serviceConnectionName: ${{ parameters.serviceConnectionName }}
                 - ${{ parameters.deploySteps }}
-                - ${{ parameters.deployJobs }}
+      - ${{ parameters.deployJobs }}
