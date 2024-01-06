@@ -2,6 +2,9 @@
 parameters:
   - name: configRef
     type: string
+  - name: deployJobs
+    type: jobList
+    default: []
   - name: deploySteps
     type: stepList
     default: []
@@ -12,6 +15,9 @@ parameters:
     default: []
   - name: organisationName
     type: string
+  - name: planSteps
+    type: stepList
+    default: []
   - name: serviceConnectionName
     type: string
   - name: workloadFeedName
@@ -22,6 +28,18 @@ resources:
     - repository: self
 
 stages:
+  - ${{ if ne(length(parameters.planSteps), 0) }}:
+    - template: ../stages/deploy.yml
+      parameters:
+        configRef: ${{ parameters.configRef }}
+        deployJobs: ${{ parameters.deployJobs }}
+        deploySteps: ${{ parameters.planSteps }}
+        environment: ${{ parameters.environment }}
+        installSteps: ${{ parameters.installSteps }}
+        organisationName: ${{ parameters.organisationName }}
+        serviceConnectionName: ${{ parameters.serviceConnectionName }}
+        stageName: Plan
+        workloadFeedName: ${{ parameters.workloadFeedName }}
   - template: ../stages/deploy.yml
     parameters:
       configRef: ${{ parameters.configRef }}

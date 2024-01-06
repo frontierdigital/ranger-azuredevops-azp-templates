@@ -2,6 +2,9 @@
 parameters:
   - name: configRef
     type: string
+  - name: deployJobs
+    type: jobList
+    default: []
   - name: deploySteps
     type: stepList
     default: []
@@ -14,11 +17,14 @@ parameters:
     type: string
   - name: serviceConnectionName
     type: string
+  - name: stageName
+    type: string
+    default: Deploy
   - name: workloadFeedName
     type: string
 
 stages:
-  - stage: Deploy
+  - stage: ${{ parameters.stageName }}
     pool:
       vmImage: ubuntu-latest
     jobs:
@@ -45,3 +51,4 @@ stages:
                         ref: ${{ parameters.configRef }}
                         serviceConnectionName: ${{ parameters.serviceConnectionName }}
                 - ${{ parameters.deploySteps }}
+      - ${{ parameters.deployJobs }}
