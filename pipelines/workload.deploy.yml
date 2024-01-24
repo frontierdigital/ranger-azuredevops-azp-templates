@@ -20,6 +20,10 @@ parameters:
 resources:
   repositories:
     - repository: self
+    - repository: config
+      type: git
+      name: ${{ split(parameters.configRef, '@')[0] }}
+      ref: ${{ split(parameters.configRef, '@')[1] }}
 
 stages:
   - template: ../stages/deploy.yml
