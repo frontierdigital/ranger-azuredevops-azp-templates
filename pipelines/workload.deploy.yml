@@ -22,7 +22,7 @@ resources:
     - repository: self
     - repository: config
       type: git
-      name: ${{ split(parameters.configRef, '@')[0] }}
+      name: generated-set-config
       ref: ${{ split(parameters.configRef, '@')[1] }}
 
 stages:
