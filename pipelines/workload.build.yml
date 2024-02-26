@@ -11,6 +11,10 @@ parameters:
   - name: installSteps
     type: stepList
     default: []
+  - name: pool
+    type: object
+    default:
+      vmImage: ubuntu-latest
   - name: postPublishSteps
     type: stepList
     default: []
@@ -26,6 +30,8 @@ parameters:
 resources:
   repositories:
     - repository: self
+
+pool: ${{ parameters.pool }}
 
 stages:
   - template: ../stages/build.yml
