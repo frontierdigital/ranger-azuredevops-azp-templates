@@ -11,6 +11,9 @@ parameters:
   - name: installSteps
     type: stepList
     default: []
+  - name: pool
+    type: string
+    default: null
   - name: postPublishSteps
     type: stepList
     default: []
@@ -26,6 +29,9 @@ parameters:
 resources:
   repositories:
     - repository: self
+
+${{ if pool }}:
+  pool: ${{ parameters.pool }}
 
 stages:
   - template: ../stages/build.yml
