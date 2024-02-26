@@ -6,6 +6,10 @@ parameters:
   - name: installSteps
     type: stepList
     default: []
+  - name: pool
+    type: object
+    default:
+      vmImage: ubuntu-latest
   - name: postPublishSteps
     type: stepList
     default: []
@@ -18,8 +22,7 @@ parameters:
 
 stages:
   - stage: Build
-    pool:
-      vmImage: ubuntu-latest
+    pool: ${{ parameters.pool }}
     jobs:
       - template: ../jobs/preflight.yml
       - job: Build

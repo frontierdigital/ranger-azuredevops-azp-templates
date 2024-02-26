@@ -31,13 +31,12 @@ resources:
   repositories:
     - repository: self
 
-pool: ${{ parameters.pool }}
-
 stages:
   - template: ../stages/build.yml
     parameters:
       buildSteps: ${{ parameters.buildSteps }}
       installSteps: ${{ parameters.installSteps }}
+      pool: ${{ parameters.pool }}
       postPublishSteps: ${{ parameters.postPublishSteps }}
       prePublishSteps: ${{ parameters.prePublishSteps }}
       testSteps: ${{ parameters.testSteps }}
