@@ -12,6 +12,10 @@ parameters:
     default: []
   - name: organisationName
     type: string
+  - name: pool
+    type: object
+    default:
+      vmImage: ubuntu-latest
   - name: serviceConnectionName
     type: string
   - name: workloadFeedName

@@ -4,11 +4,14 @@ parameters:
     type: string
   - name: jobs
     type: jobList
+  - name: pool
+    type: object
+    default:
+      vmImage: ubuntu-latest
 
 stages:
   - stage: Publish
-    pool:
-      vmImage: ubuntu-latest
+    pool: ${{ parameters.pool }}
     condition: ${{ parameters.condition }}
     jobs:
       - ${{ parameters.jobs }}

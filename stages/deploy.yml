@@ -10,6 +10,10 @@ parameters:
   - name: installSteps
     type: stepList
     default: []
+  - name: pool
+    type: object
+    default:
+      vmImage: ubuntu-latest
   - name: organisationName
     type: string
   - name: serviceConnectionName
@@ -19,8 +23,7 @@ parameters:
 
 stages:
   - stage: Deploy
-    pool:
-      vmImage: ubuntu-latest
+    pool: ${{ parameters.pool }}
     jobs:
       - deployment: DeployFromPipelineArtifact
         displayName: Deploy workload package

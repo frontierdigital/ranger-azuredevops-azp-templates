@@ -54,3 +54,4 @@ stages:
         - template: ../jobs/publish-workload-package.yml
           parameters:
             workloadFeedName: ${{ parameters.workloadFeedName }}
+      pool: ${{ parameters.pool }}
