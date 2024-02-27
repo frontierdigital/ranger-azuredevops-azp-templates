@@ -8,8 +8,6 @@ parameters:
     default: []
   - name: pool
     type: object
-    default:
-      vmImage: ubuntu-latest
   - name: postPublishSteps
     type: stepList
     default: []

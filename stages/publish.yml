@@ -6,8 +6,6 @@ parameters:
     type: jobList
   - name: pool
     type: object
-    default:
-      vmImage: ubuntu-latest
 
 stages:
   - stage: Publish

@@ -12,8 +12,6 @@ parameters:
     default: []
   - name: pool
     type: object
-    default:
-      vmImage: ubuntu-latest
   - name: organisationName
     type: string
   - name: serviceConnectionName

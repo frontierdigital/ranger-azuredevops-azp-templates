@@ -14,8 +14,6 @@ parameters:
     type: string
   - name: pool
     type: object
-    default:
-      vmImage: ubuntu-latest
   - name: serviceConnectionName
     type: string
   - name: workloadFeedName
@@ -33,5 +31,6 @@ stages:
       environment: ${{ parameters.environment }}
       installSteps: ${{ parameters.installSteps }}
       organisationName: ${{ parameters.organisationName }}
+      pool: ${{ parameters.pool }}
       serviceConnectionName: ${{ parameters.serviceConnectionName }}
       workloadFeedName: ${{ parameters.workloadFeedName }}
