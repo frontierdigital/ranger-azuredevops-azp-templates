@@ -11,6 +11,8 @@ parameters:
     type: string
   - name: organisationName
     type: string
+  - name: pool
+    type: object
   - name: rangerVersion
     type: string
 
@@ -20,8 +22,7 @@ resources:
 
 jobs:
   - job: Execute
-    pool:
-      vmImage: ubuntu-latest
+    pool: ${{ parameters.pool }}
     steps:
       - task: InstallRangerCLI@0
         inputs:
