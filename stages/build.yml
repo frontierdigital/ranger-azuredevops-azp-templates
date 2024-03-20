@@ -28,6 +28,7 @@ stages:
       - template: ../jobs/preflight.yml
       - job: Build
         dependsOn: Preflight
+        timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
         variables:
           - name: versionFromFile
             value: $[dependencies.Preflight.outputs['getVersionFromFile.versionFromFile']]
