@@ -41,6 +41,7 @@ stages:
       postPublishSteps: ${{ parameters.postPublishSteps }}
       prePublishSteps: ${{ parameters.prePublishSteps }}
       testSteps: ${{ parameters.testSteps }}
+      timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
   - template: ../stages/publish.yml
     parameters:
       condition: |
