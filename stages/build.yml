@@ -17,6 +17,9 @@ parameters:
   - name: testSteps
     type: stepList
     default: []
+  - name: timeoutInMinutes
+    type: number
+    default: 60
 
 stages:
   - stage: Build
