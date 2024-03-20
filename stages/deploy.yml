@@ -10,10 +10,10 @@ parameters:
   - name: installSteps
     type: stepList
     default: []
-  - name: pool
-    type: object
   - name: organisationName
     type: string
+  - name: pool
+    type: object
   - name: serviceConnectionName
     type: string
   - name: timeoutInMinutes
