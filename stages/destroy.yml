@@ -28,6 +28,7 @@ stages:
     jobs:
       - deployment: DestroyFromPipelineArtifact
         displayName: Destroy workload package
+        timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
         environment:
           name: ${{ parameters.environment }}
         strategy:
