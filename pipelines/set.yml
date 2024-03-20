@@ -15,6 +15,9 @@ parameters:
     type: object
   - name: rangerVersion
     type: string
+  - name: timeoutInMinutes
+    type: number
+    default: 60
 
 resources:
   repositories:
