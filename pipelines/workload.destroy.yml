@@ -16,6 +16,9 @@ parameters:
     type: object
   - name: serviceConnectionName
     type: string
+  - name: timeoutInMinutes
+    type: number
+    default: 60
   - name: workloadFeedName
     type: string
 
