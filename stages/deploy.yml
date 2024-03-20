@@ -14,6 +14,9 @@ parameters:
     type: object
   - name: organisationName
     type: string
+  - name: timeoutInMinutes
+    type: number
+    default: 60
   - name: serviceConnectionName
     type: string
   - name: workloadFeedName
@@ -25,6 +28,7 @@ stages:
     jobs:
       - deployment: DeployFromPipelineArtifact
         displayName: Deploy workload package
+        timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
         environment:
           name: ${{ parameters.environment }}
         strategy:
