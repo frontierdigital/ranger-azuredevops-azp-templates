@@ -26,6 +26,7 @@ resources:
 jobs:
   - job: Execute
     pool: ${{ parameters.pool }}
+    timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
     steps:
       - task: InstallRangerCLI@0
         inputs:
