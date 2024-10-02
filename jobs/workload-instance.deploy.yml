@@ -20,7 +20,8 @@ parameters:
     default: 60
 
 jobs:
-  - job: Execute
+  - job: Deploy
+    displayName: Deploy workload instance
     timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
     steps:
       - task: InstallRangerCLI@0

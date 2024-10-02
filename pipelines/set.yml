@@ -24,7 +24,8 @@ resources:
     - repository: self
 
 jobs:
-  - job: Execute
+  - job: Deploy
+    displayName: Deploy set
     pool: ${{ parameters.pool }}
     timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
     steps:
