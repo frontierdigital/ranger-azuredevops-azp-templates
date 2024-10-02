@@ -1,0 +1,40 @@
+---
+parameters:
+  - name: action
+    type: string
+    values:
+      - Default
+      - DryRun
+  - name: environment
+    type: string
+  - name: gitUserEmail
+    type: string
+  - name: gitUserName
+    type: string
+  - name: organisationName
+    type: string
+  - name: pool
+    type: object
+  - name: rangerVersion
+    type: string
+  - name: timeoutInMinutes
+    type: number
+    default: 60
+
+jobs:
+  - job: Execute
+    pool: ${{ parameters.pool }}
+    timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
+    steps:
+      - task: InstallRangerCLI@0
+        inputs:
+          version: ${{ parameters.rangerVersion }}
+      # - task: DeployWorkload@0
+      #   inputs:
+      #     environment: ${{ parameters.environment }}
+      #     gitUserEmail: ${{ parameters.gitUserEmail }}
+      #     gitUserName: ${{ parameters.gitUserName }}
+      #     organisationName: ${{ parameters.organisationName }}
+      #     pat: $(System.AccessToken)
+      #     projectName: $(System.TeamProject)
+      - script: echo "Deploying workload"

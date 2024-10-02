@@ -27,7 +27,7 @@ resources:
     - repository: self
 
 stages:
-  - template: ../stages/destroy.yml
+  - template: ../stages/workload.destroy.yml
     parameters:
       configRef: ${{ parameters.configRef }}
       destroySteps: ${{ parameters.destroySteps }}

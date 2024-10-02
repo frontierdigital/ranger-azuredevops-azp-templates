@@ -27,7 +27,7 @@ resources:
     - repository: self
 
 stages:
-  - template: ../stages/deploy.yml
+  - template: ../stages/workload.deploy.yml
     parameters:
       configRef: ${{ parameters.configRef }}
       deploySteps: ${{ parameters.deploySteps }}
